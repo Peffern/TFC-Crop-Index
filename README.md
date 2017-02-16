@@ -1,6 +1,6 @@
-TFC Template Mod
+TFC Crop Index
 ================
 
-For use within the TerraFirmaCraft v79 mod for Minecraft.
+For TFC 0.79.29
 
-This mod adds additional functionality to the TerraFirmaCraft mod.
+This is an API mod to make it easier for people to add TFC crops that work with TFC's base worldgen and nutrient system.  This abstracts away TFC's hardcoded crop rendering with ASM and has conflict avoidance for the integer crop IDs. 
