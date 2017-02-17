@@ -1,9 +1,15 @@
 package com.peffern.crops;
 
+import java.util.Random;
+
+import com.bioxx.tfc.Food.CropIndex;
+import com.bioxx.tfc.Food.ItemFoodTFC;
+
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
 
 /**
@@ -37,15 +43,21 @@ public class BaseCrop implements ICrop
 	/** nutrient restoration values (A/B/C) */
 	private int[] nutrientRestore;
 	/** yield item instance */
-	private Item cropItem;
-	/** amount (count or food weight) of yield */
-	private float cropAmount;
+	private ItemStack cropItem;
 	/** seed oredict name */
 	private String seedOreName;
 	/** seed icon name */
 	private String seedIcon;
 	/** seed unlocalized name */
 	private String seedUnlocalizedName;
+	
+	public static ItemStack makeStack(Item item, int amount)
+	{
+		if(item instanceof ItemFoodTFC)
+			return ItemFoodTFC.createTag(new ItemStack(item), amount);
+		else
+			return new ItemStack(item,amount);
+	}
 	
 	/**
 	 * Constructs a BaseCrop from parameters
@@ -62,7 +74,7 @@ public class BaseCrop implements ICrop
 	 * @param seedIcon the icon name for seeds e.g. "terrafirmacraft:food/unused/img131"
 	 * @param seedUnlocalizedName the unlocalized (language) name for the seeds e.g. "Seeds Pumpkin"
 	 */
-	public BaseCrop(String name, int type, int time, String[] iconNames, int gTemp, int aTemp, float nutrient, Item crop, float amount, String seedOreName, String seedIcon, String seedUnlocalizedName)
+	public BaseCrop(String name, int type, int time, String[] iconNames, int gTemp, int aTemp, float nutrient, ItemStack crop, String seedOreName, String seedIcon, String seedUnlocalizedName, int[] nutrientRestore)
 	{
 		this.name = name;
 		this.type = type;
@@ -73,37 +85,38 @@ public class BaseCrop implements ICrop
 		this.minATemp = aTemp;
 		this.nutrientUsage = nutrient;
 		this.cropItem = crop;
-		this.cropAmount = amount;
 		this.seedOreName = seedOreName;
 		this.seedIcon = seedIcon;
 		this.seedUnlocalizedName = seedUnlocalizedName;
 		this.nutrientRestore = null;
-	}
-	
-	public BaseCrop(String name, int type, int time, String[] iconNames, int gTemp, int aTemp, float nutrient, Item crop, float amount, String seedOreName, String seedIcon, String seedUnlocalizedName, int[] nutrientRestore)
-	{
-		this(name,type,time,iconNames,gTemp,aTemp,nutrient,crop,amount,seedOreName,seedIcon,seedUnlocalizedName);
 		this.nutrientRestore = nutrientRestore;
 	}
-
-	@Override
-	public Item getOutput1Item() {
-		return cropItem;
+	
+	public BaseCrop(String name, int type, int time, String[] iconNames, int gTemp, int aTemp, float nutrient, Item crop, int amount, String seedOreName, String seedIcon, String seedUnlocalizedName, int[] nutrientRestore)
+	{
+		this(name,type,time,iconNames,gTemp,aTemp,nutrient,makeStack(crop,amount),seedOreName,seedIcon,seedUnlocalizedName, nutrientRestore);
+	}
+	
+	public BaseCrop(String name, int type, int time, String[] iconNames, int gTemp, int aTemp, float nutrient, Item crop, int amount, String seedOreName, String seedIcon, String seedUnlocalizedName)
+	{
+		this(name,type,time,iconNames,gTemp,aTemp,nutrient,makeStack(crop,amount),seedOreName,seedIcon,seedUnlocalizedName, new int[]{0,0,0});
+	}
+	
+	public BaseCrop(String name, int type, int time, String[] iconNames, int gTemp, int aTemp, float nutrient, ItemStack crop, String seedOreName, String seedIcon, String seedUnlocalizedName)
+	{
+		this(name,type,time,iconNames,gTemp,aTemp,nutrient,crop,seedOreName,seedIcon,seedUnlocalizedName, new int[]{0,0,0});
 	}
 
 	@Override
-	public float getOutput1Qty() {
-		return cropAmount;
+	public ItemStack getOutput1()
+	{
+		return cropItem.copy();
 	}
-
+	
 	@Override
-	public Item getOutput2Item() {
+	public ItemStack getOutput2()
+	{
 		return null;
-	}
-
-	@Override
-	public float getOutput2Qty() {
-		return 0;
 	}
 
 	@Override

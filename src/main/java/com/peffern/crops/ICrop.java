@@ -4,6 +4,7 @@ import net.minecraft.block.Block;
 import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
 
 /**
@@ -37,17 +38,9 @@ public interface ICrop
 	/** nutrient restore */
 	public int[] getNutrientRestore();
 	
-	/** main item output */
-	public Item getOutput1Item();
+	public ItemStack getOutput1();
 	
-	/** main item stack/food size */
-	public float getOutput1Qty();
-	
-	/** bonus item output */
-	public Item getOutput2Item();
-	
-	/** bonus output stack/food size */
-	public float getOutput2Qty();
+	public ItemStack getOutput2();
 
 	/** rendering code for this crop */
 	public boolean render(Block block, int x, int y, int z, RenderBlocks renderblocks);

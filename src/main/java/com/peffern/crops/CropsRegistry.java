@@ -10,6 +10,7 @@ import com.bioxx.tfc.Food.CropIndexJute;
 import com.bioxx.tfc.Food.CropManager;
 import com.bioxx.tfc.Food.ItemFoodTFC;
 import com.bioxx.tfc.Items.ItemCustomSeeds;
+import com.bioxx.tfc.TileEntities.TECrop;
 
 import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.client.renderer.texture.IIconRegister;
@@ -63,38 +64,41 @@ public class CropsRegistry
 		//localization
 		seed.setUnlocalizedName(crop.getSeedUnlocalizedName());
 		GameRegistry.registerItem(seed, seed.getUnlocalizedName());
+		
 		//generate TFC crop index
-		Item i1 = crop.getOutput1Item();
 		int[] nr = crop.getNutrientRestore();
-		CropIndex index;
-		if(i1 != null && i1 instanceof ItemFoodTFC)
+		if(nr == null)
+			nr = new int[]{0,0,0};
+				
+		CropIndex index = new CropIndex(cropId, crop.getName(), crop.getType(), crop.getTime(), crop.getStages(), crop.getMinGTemp(), crop.getMinATemp(), crop.getNutrientUsage(), seed, nr)
 		{
-			if(nr != null)
-				index = new CropIndex(cropId, crop.getName(), crop.getType(), crop.getTime(), crop.getStages(), crop.getMinGTemp(), crop.getMinATemp(), crop.getNutrientUsage(), seed, nr);
-			else
-				index = new CropIndex(cropId, crop.getName(), crop.getType(), crop.getTime(), crop.getStages(), crop.getMinGTemp(), crop.getMinATemp(), crop.getNutrientUsage(), seed);
-
-		}
-		else
+			@Override
+			public ItemStack getOutput1(TECrop te)
+			{
+				ItemStack is = crop.getOutput1();
+				if (is != null)
+					return is.copy();
+				else
+					return null;
+			}
+			
+			@Override
+			public ItemStack getOutput2(TECrop te)
+			{
+				ItemStack is = crop.getOutput2();
+				if (is != null)
+					return is.copy();
+				else
+					return null;
+			}
+		};
+		ItemStack is = crop.getOutput1();
+		if(is != null)
 		{
-			if (nr != null)
-				index = new CropIndexJute(cropId, crop.getName(), crop.getType(), crop.getTime(), crop.getStages(), crop.getMinGTemp(), crop.getMinATemp(), crop.getNutrientUsage(), seed, nr);
-			else
-				index = new CropIndexJute(cropId, crop.getName(), crop.getType(), crop.getTime(), crop.getStages(), crop.getMinGTemp(), crop.getMinATemp(), crop.getNutrientUsage(), seed);
-		}
-		
-		
-		
-		//generate output
-		if(i1 != null)
-		{
-			index.setOutput1(i1, crop.getOutput1Qty());
-		}
-		//generate output 2
-		Item i2 = crop.getOutput2Item();
-		if(i2 != null)
-		{
-			index.setOutput2(i2, crop.getOutput2Qty());
+			Item i1 = is.getItem();
+			int c = is.stackSize;
+			if (i1 != null)
+				index.setOutput1(i1, c);
 		}
 		//register with TFC
 		CropManager.getInstance().addIndex(index);

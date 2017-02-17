@@ -15,7 +15,7 @@ public class CropsIndexLoadingPlugin implements IFMLLoadingPlugin
 	@Override
 	public String[] getASMTransformerClass() 
 	{
-		return new String[]{BlockSetupCT.class.getName(), BlockRenderHandlerCT.class.getName()};
+		return new String[]{BlockSetupCT.class.getName(), BlockRenderHandlerCT.class.getName(), WAILADataCT.class.getName()};
 	}
 
 	@Override
