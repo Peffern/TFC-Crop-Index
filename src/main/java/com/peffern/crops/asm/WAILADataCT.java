@@ -1,5 +1,5 @@
 package com.peffern.crops.asm;
-//mv.visitMethodInsn(INVOKEVIRTUAL, "com/bioxx/tfc/WAILA/WAILAData", "cropStack", "(Lmcp/mobius/waila/api/IWailaDataAccessor;Lmcp/mobius/waila/api/IWailaConfigHandler;)Lnet/minecraft/item/ItemStack;", false);
+
 import java.util.ListIterator;
 
 import org.objectweb.asm.ClassReader;
@@ -14,7 +14,7 @@ import net.minecraft.launchwrapper.IClassTransformer;
 import static org.objectweb.asm.Opcodes.*;
 
 /**
- * ASM plugin to alter the BlockRenderHandler to use the custom crop renderer
+ * ASM plugin to alter the WAILAData to use the custom WAILA function
  * @author peffern
  *
  */
@@ -49,7 +49,7 @@ public class WAILADataCT  implements IClassTransformer
 					AbstractInsnNode insn = it.next();
 					if(insn instanceof MethodInsnNode)
 					{
-						//find the static call to WAILAData.cropStack and replace it with a call to TFCCropIndex.getWailaStack
+						//find the static call to WAILAData.cropStack and replace it with a call to TFCCropIndex.getWailaStack (desc are the same)
 						MethodInsnNode minsn = (MethodInsnNode)insn;
 						if(minsn.name.equals("cropStack"))
 						{

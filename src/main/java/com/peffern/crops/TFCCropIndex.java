@@ -14,7 +14,7 @@ import net.minecraft.nbt.NBTTagCompound;
 
 
 /**
- * Make TFCs crop registry actually work.
+ * Make TFCs crop registry extensible
  * @author peffern
  *
  */
@@ -28,14 +28,20 @@ public class TFCCropIndex
 	public static final String MODNAME = "TFC Crop Index";
 	
 	/** Mod Version */
-	public static final String VERSION = "1.0";
+	public static final String VERSION = "1.1";
 
-
+	/**
+	 * Get the ItemStack to show in Waila when you look at a Crop
+	 * @param accessor Waila block accessor
+	 * @param config Waila config
+	 * @return the display stack
+	 */
 	public static ItemStack getWailaStack(IWailaDataAccessor accessor, IWailaConfigHandler config)
 	{
 		NBTTagCompound tag = accessor.getNBTData();
 		int cropId = tag.getInteger("cropId");
 
+		//default behavior from WAILAData.cropStack()
 		if(cropId <= 18)
 		{
 			CropIndex crop = CropManager.getInstance().getCropFromId(cropId);
@@ -58,6 +64,7 @@ public class TFCCropIndex
 				Item item = is.getItem();
 				if(item != null)
 				{
+					//get the output stack instead of the item – supports metadata
 					ItemStack ret = new ItemStack(item,1,is.getItemDamageForDisplay());
 					if (item instanceof ItemFoodTFC)
 						ItemFoodTFC.createTag(ret);

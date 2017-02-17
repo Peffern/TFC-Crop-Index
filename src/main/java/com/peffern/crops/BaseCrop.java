@@ -48,6 +48,13 @@ public class BaseCrop implements ICrop
 	/** seed unlocalized name */
 	private String seedUnlocalizedName;
 	
+	/**
+	 * Converts an item and quantity parameter to an ItemStack. 
+	 * Makes a food stack if its a TFC food, and a normal stack if not
+	 * @param item
+	 * @param amount
+	 * @return
+	 */
 	public static ItemStack makeStack(Item item, int amount)
 	{
 		if(item instanceof ItemFoodTFC)
@@ -65,11 +72,11 @@ public class BaseCrop implements ICrop
 	 * @param gTemp minimum growth temp e.g. 8
 	 * @param aTemp minimum alive temp e.g. 0
 	 * @param nutrient nutrient consumption e.g. 0.9f
-	 * @param crop the actual Item to be dropped upon harvesting the crop
-	 * @param amount how much of the Itme to be dropped upon harvesting this crop (stack size for non - food, food weight for food)
+	 * @param crop the actual ItemStack to be dropped upon harvesting the crop
 	 * @param seedOreName oreDict name of the seed Item e.g. "seedsPumpkin"
 	 * @param seedIcon the icon name for seeds e.g. "terrafirmacraft:food/unused/img131"
 	 * @param seedUnlocalizedName the unlocalized (language) name for the seeds e.g. "Seeds Pumpkin"
+	 * @param nutrientRestore the array of nutrient restoration values for A,B,C when this crop grows
 	 */
 	public BaseCrop(String name, int type, int time, String[] iconNames, int gTemp, int aTemp, float nutrient, ItemStack crop, String seedOreName, String seedIcon, String seedUnlocalizedName, int[] nutrientRestore)
 	{
@@ -89,21 +96,33 @@ public class BaseCrop implements ICrop
 		this.nutrientRestore = nutrientRestore;
 	}
 	
+	/**
+	 * Constructs a BaseCrop from an Item and amount instead of a stack
+	 */
 	public BaseCrop(String name, int type, int time, String[] iconNames, int gTemp, int aTemp, float nutrient, Item crop, int amount, String seedOreName, String seedIcon, String seedUnlocalizedName, int[] nutrientRestore)
 	{
 		this(name,type,time,iconNames,gTemp,aTemp,nutrient,makeStack(crop,amount),seedOreName,seedIcon,seedUnlocalizedName, nutrientRestore);
 	}
 	
+	/**
+	 * Constructs a BaseCrop from an Item and amount without nutrientRestore (optional)
+	 */
 	public BaseCrop(String name, int type, int time, String[] iconNames, int gTemp, int aTemp, float nutrient, Item crop, int amount, String seedOreName, String seedIcon, String seedUnlocalizedName)
 	{
 		this(name,type,time,iconNames,gTemp,aTemp,nutrient,makeStack(crop,amount),seedOreName,seedIcon,seedUnlocalizedName, new int[]{0,0,0});
 	}
 	
+	/**
+	 * Constructs a BaseCrop without nutrientRestore (optional)
+	 */
 	public BaseCrop(String name, int type, int time, String[] iconNames, int gTemp, int aTemp, float nutrient, ItemStack crop, String seedOreName, String seedIcon, String seedUnlocalizedName)
 	{
 		this(name,type,time,iconNames,gTemp,aTemp,nutrient,crop,seedOreName,seedIcon,seedUnlocalizedName, new int[]{0,0,0});
 	}
 
+	/* == Implement ICrop == */
+	
+	
 	@Override
 	public ItemStack getOutput1()
 	{

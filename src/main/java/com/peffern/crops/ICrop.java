@@ -37,8 +37,10 @@ public interface ICrop
 	/** nutrient restore */
 	public int[] getNutrientRestore();
 	
+	/** main output */
 	public ItemStack getOutput1();
 	
+	/** secondary output */
 	public ItemStack getOutput2();
 
 	/** rendering code for this crop */
