@@ -58,7 +58,10 @@ public class TFCCropIndex
 				Item item = is.getItem();
 				if(item != null)
 				{
-					return new ItemStack(item,1,is.getItemDamageForDisplay());
+					ItemStack ret = new ItemStack(item,1,is.getItemDamageForDisplay());
+					if (item instanceof ItemFoodTFC)
+						ItemFoodTFC.createTag(ret);
+					return ret;
 				}
 			}
 			return null;
