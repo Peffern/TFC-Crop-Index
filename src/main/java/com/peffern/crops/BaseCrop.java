@@ -1,8 +1,5 @@
 package com.peffern.crops;
 
-import java.util.Random;
-
-import com.bioxx.tfc.Food.CropIndex;
 import com.bioxx.tfc.Food.ItemFoodTFC;
 
 import net.minecraft.block.Block;

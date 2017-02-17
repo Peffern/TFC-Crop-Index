@@ -1,8 +1,6 @@
 package com.peffern.crops;
 
 
-import javax.swing.JOptionPane;
-
 import com.bioxx.tfc.Food.CropIndex;
 import com.bioxx.tfc.Food.CropManager;
 import com.bioxx.tfc.Food.ItemFoodTFC;

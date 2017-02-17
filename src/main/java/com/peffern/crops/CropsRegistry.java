@@ -6,9 +6,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 import com.bioxx.tfc.Core.Recipes;
 import com.bioxx.tfc.Food.CropIndex;
-import com.bioxx.tfc.Food.CropIndexJute;
 import com.bioxx.tfc.Food.CropManager;
-import com.bioxx.tfc.Food.ItemFoodTFC;
 import com.bioxx.tfc.Items.ItemCustomSeeds;
 import com.bioxx.tfc.TileEntities.TECrop;
 
