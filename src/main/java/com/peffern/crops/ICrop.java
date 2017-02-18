@@ -44,7 +44,7 @@ public interface ICrop
 	public ItemStack getOutput2();
 
 	/** rendering code for this crop */
-	public boolean render(Block block, int x, int y, int z, RenderBlocks renderblocks);
+	public boolean render(Block block, double x, double y, double z, RenderBlocks renderblocks);
 	
 	/** register crop icons */
 	public void registerIcons(IIconRegister register);

@@ -136,7 +136,7 @@ public class BaseCrop implements ICrop
 	}
 
 	@Override
-	public boolean render(Block block, int x, int y, int z, RenderBlocks renderblocks) 
+	public boolean render(Block block, double x, double y, double z, RenderBlocks renderblocks) 
 	{
 		//use the crossed squares renderer with some parameters I learned from TFC's code. I guess those are height and width or something.
 		RenderCustomCrop.drawCrossedSquares(block,x,y,z,renderblocks,0.45,1.0);

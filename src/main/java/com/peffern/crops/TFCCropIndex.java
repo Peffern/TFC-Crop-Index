@@ -18,7 +18,7 @@ import net.minecraft.nbt.NBTTagCompound;
  * @author peffern
  *
  */
-@Mod(modid = TFCCropIndex.MODID, name = TFCCropIndex.MODNAME, version = TFCCropIndex.VERSION, dependencies = "required-after:" + "terrafirmacraft" + ";")
+@Mod(modid = TFCCropIndex.MODID, name = TFCCropIndex.MODNAME, version = TFCCropIndex.VERSION, dependencies = "required-after:" + "terrafirmacraft" + ";" + "required-after:" + "Waila" + ";")
 public class TFCCropIndex 
 {	
 	/** Mod ID String */
