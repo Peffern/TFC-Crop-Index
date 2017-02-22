@@ -11,7 +11,7 @@ The entry point for TFC Crop Index is the static method CropsRegistry.addCrop().
 
 Since ICrop is large and annoying, the implementation BaseCrop is provided, which tries has predefined rendering code and fills out the interface for you. All of the parameters are in the constructor, so you should be able to just pass in a load of values and then pass the BaseCrop to the CropsRegistry.
 
-Note: if you are using this mod in your environment, make sure to add com.peffern.crops.asm.CropsIndexLoading plugin to your list of Coremods so that my ASM gets executed
+Note: if you are using this mod in your environment, make sure to add com.peffern.crops.asm.CropsIndexLoadingPlugin to your list of Coremods so that my ASM gets executed
 
 If you want to change the rendering behavior you can override the appropriate method.
 
