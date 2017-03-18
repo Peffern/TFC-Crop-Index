@@ -53,7 +53,7 @@ public class WAILADataCT  implements IClassTransformer
 						MethodInsnNode minsn = (MethodInsnNode)insn;
 						if(minsn.name.equals("cropStack"))
 						{
-							MethodInsnNode newMinsn = new MethodInsnNode(INVOKESTATIC, "com/peffern/crops/TFCCropIndex", "getWailaStack", minsn.desc, minsn.itf);
+							MethodInsnNode newMinsn = new MethodInsnNode(INVOKESTATIC, "com/peffern/crops/TFCCropIndex", "getWailaStack", "(Ljava/lang/Object;Ljava/lang/Object;)Lnet/minecraft/item/ItemStack;", minsn.itf);
 							m.instructions.insert(minsn,newMinsn);
 							m.instructions.remove(minsn);
 						}
