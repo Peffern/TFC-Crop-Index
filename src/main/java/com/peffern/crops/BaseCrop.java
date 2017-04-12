@@ -126,7 +126,10 @@ public class BaseCrop implements ICrop
 	@Override
 	public ItemStack getOutput1()
 	{
-		return cropItem.copy();
+		if(cropItem == null)
+			return null;
+		else
+			return cropItem.copy();
 	}
 	
 	@Override

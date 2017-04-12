@@ -141,4 +141,19 @@ public class CropsRegistry
 			c.registerIcons(register);
 		}
 	}
+	
+	public static int getCropId(ICrop crop)
+	{
+		for(Map.Entry<Integer,ICrop> entry : CROPS_MAP.entrySet())
+		{
+			int id = entry.getKey();
+			ICrop val = entry.getValue();
+			if(val.equals(crop))
+			{
+				return id;
+			}
+		}
+		
+		return -1;
+	}
 }
