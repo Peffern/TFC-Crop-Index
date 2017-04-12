@@ -84,7 +84,7 @@ public class CropsRegistry
 			public ItemStack getOutput2(TECrop te)
 			{
 				ItemStack is = crop.getOutput2();
-				if (is != null)
+				if (is != null && te.growth >= numGrowthStages)
 					return is.copy();
 				else
 					return null;
