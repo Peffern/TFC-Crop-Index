@@ -40,10 +40,12 @@ public class RenderCustomCrop extends RenderCrop
 		Tessellator var9 = Tessellator.instance;
 		var9.setBrightness(block.getMixedBrightnessForBlock(blockaccess, x, y, z));
 		
+		boolean ret = true;
+		
 		if(cropTE.cropId <= 18)
 		{
 			//use default rendering code
-			return RenderCrop.render(block, x, y, z, renderblocks);
+			ret = RenderCrop.render(block, x, y, z, renderblocks);
 		}
 		else
 		{
@@ -51,7 +53,7 @@ public class RenderCustomCrop extends RenderCrop
 			ICrop crop = CropsRegistry.getCrop(cropTE.cropId);
 			if (crop != null)
 			{
-				return crop.render(block,x,y,z,renderblocks);
+				ret = crop.render(block,x,y,z,renderblocks);
 			}
 		}
 		
@@ -70,7 +72,7 @@ public class RenderCustomCrop extends RenderCrop
 			tessellator.addVertexWithUV(x+0, y+0.001, z+0, ((BlockCrop)block).iconInfest.getMinU(), ((BlockCrop)block).iconInfest.getMinV());
 
 		}
-		return true;
+		return ret;
 	}
 	
 	//invokes the drawCrossedSquares method of RenderCrop, which has been made private for a silly reason, using reflection
