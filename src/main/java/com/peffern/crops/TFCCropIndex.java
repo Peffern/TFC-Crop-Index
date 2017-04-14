@@ -36,53 +36,7 @@ public class TFCCropIndex
 	 * @param config Waila config
 	 * @return the display stack
 	 */
-	public static ItemStack getWailaStack(Object accessor, Object config)
-	{
-		try
-		{
-			Method getNBTData = accessor.getClass().getDeclaredMethod("getNBTData", new Class<?>[0]);	
-			NBTTagCompound tag = (NBTTagCompound)getNBTData.invoke(accessor, new Object[0]);
-			int cropId = tag.getInteger("cropId");
 	
-			//default behavior from WAILAData.cropStack()
-			if(cropId <= 18)
-			{
-				CropIndex crop = CropManager.getInstance().getCropFromId(cropId);
-				ItemStack itemstack;
-	
-				if (crop.output2 != null)
-					itemstack = new ItemStack(crop.output2);
-				else
-					itemstack = new ItemStack(crop.output1);
-	
-				ItemFoodTFC.createTag(itemstack);
-				return itemstack;
-			}
-			else
-			{
-				ICrop crop = CropsRegistry.getCrop(cropId);
-				ItemStack is = crop.getOutput1();
-				if(is != null)
-				{
-					Item item = is.getItem();
-					if(item != null)
-					{
-						//get the output stack instead of the item – supports metadata
-						ItemStack ret = new ItemStack(item,1,is.getItemDamageForDisplay());
-						if (item instanceof ItemFoodTFC)
-							ItemFoodTFC.createTag(ret);
-						return ret;
-					}
-				}
-				return null;
-			}
-		}
-		catch(Exception ex)
-		{
-			return null;
-		}
-		
-	}
 }
 
 
